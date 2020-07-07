@@ -1,8 +1,62 @@
 ﻿using System;
-using System.Threading;
+using System.Reflection.Metadata.Ecma335;
 
 public class Solution
 {
+    public void P2775() 
+    {
+        // 버전차이로 컴파일 에러 , 메서드 안에 메서드 있어서 오류
+
+        int number(int k , int n)
+        {
+            if (k == 0)
+            {
+                return n;
+            }
+            else if(n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return number(k - 1, n) + number(k, n - 1);
+            }
+            
+        }
+
+        int T = Convert.ToInt32(Console.ReadLine());
+        for(int i = 0; i<T; i++)
+        {
+            int k = Convert.ToInt32(Console.ReadLine());
+            int n = Convert.ToInt32(Console.ReadLine());
+            int result = number(k, n);
+            Console.WriteLine(result);
+        }
+    }
+    public void P10250()
+    {
+        int n = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+        {
+            String arg = Console.ReadLine();
+            String result = "";
+            
+            String[] HWN = arg.Split(" ");
+          
+            int Ho = (Convert.ToInt32(HWN[2]) - 1) / Convert.ToInt32(HWN[0]);
+            int Floor = Convert.ToInt32(HWN[2]) - Convert.ToInt32(HWN[0]) * Ho;
+
+            result = Convert.ToString(Floor);
+
+            if ((Ho + 1) < 10)
+                result += "0";
+            result += Convert.ToString(Ho + 1);
+
+            Console.WriteLine(result);
+
+        }
+    }
     public void P2869()
     {
         String arg = Console.ReadLine();
@@ -16,7 +70,7 @@ public class Solution
         else
         {
             V = V - A - 1;
-            day =day+ V / (A - B) + 1;
+            day = day + V / (A - B) + 1;
             Console.WriteLine(day);
         }
 
@@ -24,7 +78,7 @@ public class Solution
     public void P1193()
     {
         int n = Convert.ToInt32(Console.ReadLine());
-        int i =1;
+        int i = 1;
 
         while (n > i)
         {
@@ -32,8 +86,8 @@ public class Solution
             i++;
         }
 
-        if(i%2 == 0)
-            Console.WriteLine(n + "/" + (i-n + 1));
+        if (i % 2 == 0)
+            Console.WriteLine(n + "/" + (i - n + 1));
         else
             Console.WriteLine((i - n + 1) + "/" + n);
 
