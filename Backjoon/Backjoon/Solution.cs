@@ -3,6 +3,41 @@ using System.Threading;
 
 public class Solution
 {
+    public void P2869()
+    {
+        String arg = Console.ReadLine();
+        String[] ABV = arg.Split(" ");
+        int day = 1;
+        int A = Convert.ToInt32(ABV[0]);
+        int B = Convert.ToInt32(ABV[1]);
+        int V = Convert.ToInt32(ABV[2]);
+        if (V <= A)
+            Console.WriteLine("1");
+        else
+        {
+            V = V - A - 1;
+            day =day+ V / (A - B) + 1;
+            Console.WriteLine(day);
+        }
+
+    }
+    public void P1193()
+    {
+        int n = Convert.ToInt32(Console.ReadLine());
+        int i =1;
+
+        while (n > i)
+        {
+            n -= i;
+            i++;
+        }
+
+        if(i%2 == 0)
+            Console.WriteLine(n + "/" + (i-n + 1));
+        else
+            Console.WriteLine((i - n + 1) + "/" + n);
+
+    }
     public void P2292()
     {
         int N = Convert.ToInt32(Console.ReadLine()) - 1;
