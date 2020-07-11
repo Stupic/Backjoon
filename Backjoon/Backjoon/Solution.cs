@@ -1,10 +1,274 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Threading;
 
 public class Solution
 {
+    public void P3053()
+    {
+        int r = Convert.ToInt32(Console.ReadLine());
+        
+        
+        Console.WriteLine("{0:F6}", (r * r * Math.PI));
+        Console.WriteLine("{0:F6}",(r * r * 2));
+        
+    }
+    public void P4153()
+    {
+        String arg = Console.ReadLine();
+
+        while(!arg.Equals("0 0 0"))
+        {
+            String[] ABC = arg.Split(" ");
+            List<int> sort = new List<int> { };
+            sort.Add(Convert.ToInt32(ABC[0]));
+            sort.Add(Convert.ToInt32(ABC[1]));
+            sort.Add(Convert.ToInt32(ABC[2]));
+            sort.Sort();
+
+            int A = sort[0];
+            int B = sort[1];
+            int C = sort[2];
+
+            if (A * A + B * B == C * C)
+                Console.WriteLine("right");
+            else
+                Console.WriteLine("wrong");
+
+            arg = Console.ReadLine();
+
+        }
+
+    }
+    public void P3009()
+    {
+        int[] XXX = new int[3];
+        int[] YYY = new int[3];
+        int x, y;
+        int xcheck = 0;
+        int ycheck = 0;
+        for (int i = 0; i<3; i++)
+        {
+            String args = Console.ReadLine();
+            String[] arg = args.Split();
+
+            XXX[i] = Convert.ToInt32(arg[0]);
+            YYY[i] = Convert.ToInt32(arg[1]);
+        }
+
+        for(int i = 1; i< 3; i++)
+        {
+            if (XXX[0] == XXX[i])
+                xcheck = i;
+
+            if (YYY[0] == YYY[i])
+                ycheck = i;
+        }
+
+        if (xcheck != 0)
+            Console.Write(XXX[3 - xcheck] + " ");
+        else
+            Console.Write(XXX[xcheck] + " ");
+
+        if (ycheck != 0)
+            Console.WriteLine(YYY[3 - ycheck]);
+        else
+            Console.WriteLine(YYY[ycheck]);
+    }
+    public void P1085()
+    {
+        String arg = Console.ReadLine();
+        String[] xywh = arg.Split(" ");
+        int x = Convert.ToInt32(xywh[0]);
+        int y = Convert.ToInt32(xywh[1]);
+        int w = Convert.ToInt32(xywh[2]);
+        int h = Convert.ToInt32(xywh[3]);
+
+        if (x > w - x)
+            x = w - x;
+
+        if (y > h - y)
+            y = h - y;
+
+        if (x > y)
+            Console.WriteLine(y);
+        else
+            Console.WriteLine(x);
+
+    }
+    public void P9020()
+    {
+        int[] primecheck = new int[10001];
+        primecheck[0] = 1;
+        primecheck[1] = 1;
+        primecheck[2] = 0;
+        for (int i = 2; i <= 10000; i++)
+        {
+
+            if (primecheck[i] == 0)
+            {
+
+                for (int j = i; j <= 10000;)
+                {
+                    j += i;
+                    if (j < 10001)
+                        primecheck[j] = 1;
+
+                }
+            }
+        }
+
+        int T = Convert.ToInt32(Console.ReadLine());
+        for(int i = 0; i<T; i++)
+        {
+            int n = Convert.ToInt32(Console.ReadLine());
+            int bah=2;
+            for(int j = 2; j<=n/2; j++)
+            {
+                if (primecheck[j] == 0 && primecheck[n - j] == 0)
+                {
+                    bah = j;
+                }
+            }
+            Console.WriteLine(bah + " " + (n - bah));
+        }
+        
+        
+    }
+    public void P4948()
+    {
+        int[] primecheck = new int[300001];
+        primecheck[0] = 1;
+        primecheck[1] = 1;
+        primecheck[2] = 0;
+        for (int i = 2; i <= 300000; i++)
+        {
+
+            if (primecheck[i] == 0)
+            {
+
+                for (int j = i; j <= 300000;)
+                {
+                    j += i;
+                    if (j < 300001)
+                        primecheck[j] = 1;
+
+                }
+            }
+        }
+        int n = 0;
+        do
+        {
+            n = Convert.ToInt32(Console.ReadLine());
+            int count = 0;
+            for(int i = n+1; i<=2*n; i++)
+            {
+                if (primecheck[i] == 0) { 
+                    
+                    count++;
+                }
+            }
+            if(count != 0)
+                Console.WriteLine(count);
+        } while (n > 0);
+        
+    }
+    public void P1929()
+    {
+        int[] primecheck = new int[1000001];
+        primecheck[0] = 1;
+        primecheck[1] = 1;
+        primecheck[2] = 0;
+        String arg = Console.ReadLine();
+        String[] MN = arg.Split(" ");
+        int M = Convert.ToInt32(MN[0]);
+        int N = Convert.ToInt32(MN[1]);
+        var result = new StringBuilder();
+        
+        
+        for (int i = 2; i <= N; i++)
+        {
+
+            if (primecheck[i] == 0)
+            {
+                if (i >= M)
+                {
+                    result.Append(i + "\n");
+                }
+                for (int j = i; j <= N;)
+                {
+                    j += i;
+                    if (j < 1000001)
+                        primecheck[j] = 1;
+
+                }
+            }
+        }
+
+       
+
+
+        Console.WriteLine(result);
+
+
+    }
+    public void P2581()
+    {
+        int[] primecheck = new int[10001];
+        primecheck[0] = 1;
+        primecheck[1] = 1;
+        primecheck[2] = 0;
+        int M = Convert.ToInt32(Console.ReadLine());
+        int N = Convert.ToInt32(Console.ReadLine());
+        int sum = -1;
+        int min = -1;
+        List<int> n = new List<int> { };
+
+        for (int i = 2; i <=N; i++)
+        {
+
+            if (primecheck[i] == 0)
+            {
+
+                for (int j = i; j <= N;)
+                {
+                    j += i;
+                    if (j < 10001)
+                        primecheck[j] = 1;
+
+                }
+            }
+        }
+
+        for(int i = M; i<=N  ; i++)
+        {
+            if(primecheck[i]== 0)
+            {
+                if (sum == -1) { 
+                    min = i;
+                    sum = i;
+                }
+                else
+                {
+                    sum += i;
+                }
+                
+            }
+        }
+
+
+
+        Console.WriteLine(sum);
+        if(sum != -1)
+        {
+            Console.WriteLine(min);
+        }
+        
+    }
     public void P1978()
     {
         int[] primecheck = new int[1000];
