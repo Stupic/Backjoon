@@ -1,27 +1,112 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
 using System.Text;
-using System.Threading;
 
 public class Solution
 {
+
+    public void P2447()
+    {
+        
+        
+        int star(int X , int Y,int K)
+        {
+
+            if (K == 0)
+            {
+               return 0;
+            }
+
+            if (X / K == 1 && Y / K == 1)
+            {
+                return 1;
+            }
+
+
+            if (star(X, Y, K / 3) == 1)
+            {
+                return 1;
+            }
+            else if(star(X%K, Y%K, K / 3) == 1)
+            {
+                return 1;
+            }
+
+            return 0;
+
+
+        }
+        int N = Convert.ToInt32(Console.ReadLine());
+
+        
+        var result = new StringBuilder();
+        for (int i = 0; i<N; i++) 
+         {
+            for(int j = 0; j<N; j++)
+            {
+                int k = star(i, j,N / 3);
+
+                if (k == 1)
+                    result.Append(" ");
+                else
+                    result.Append("*");
+            }
+            result.Append("\n");
+        }
+
+
+        Console.Write(result);
+
+    }
+    public void P10870()
+    {
+        int Fivonaci(int n)
+        {
+            if (n < 2)
+            {
+                return n;
+            }
+            return Fivonaci(n - 1) + Fivonaci(n - 2);
+        }
+
+        int n = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine(Fivonaci(n));
+        
+    }
+    public void P10872()
+    {
+       
+        int Pectorial(int N)
+        {
+            if (N == 1)
+                return 1;
+
+
+            return N * Pectorial(N - 1);
+        }
+        int N = Convert.ToInt32(Console.ReadLine());
+
+        if(N==0)
+            Console.WriteLine(1);
+        else
+            Console.WriteLine(Pectorial(N));
+
+
+    }
+
     public void P3053()
     {
         int r = Convert.ToInt32(Console.ReadLine());
-        
-        
+
         Console.WriteLine("{0:F6}", (r * r * Math.PI));
-        Console.WriteLine("{0:F6}",(r * r * 2));
-        
+        Console.WriteLine("{0:F6}", (r * r * 2));
     }
+
     public void P4153()
     {
         String arg = Console.ReadLine();
 
-        while(!arg.Equals("0 0 0"))
+        while (!arg.Equals("0 0 0"))
         {
             String[] ABC = arg.Split(" ");
             List<int> sort = new List<int> { };
@@ -40,10 +125,9 @@ public class Solution
                 Console.WriteLine("wrong");
 
             arg = Console.ReadLine();
-
         }
-
     }
+
     public void P3009()
     {
         int[] XXX = new int[3];
@@ -51,7 +135,7 @@ public class Solution
         int x, y;
         int xcheck = 0;
         int ycheck = 0;
-        for (int i = 0; i<3; i++)
+        for (int i = 0; i < 3; i++)
         {
             String args = Console.ReadLine();
             String[] arg = args.Split();
@@ -60,7 +144,7 @@ public class Solution
             YYY[i] = Convert.ToInt32(arg[1]);
         }
 
-        for(int i = 1; i< 3; i++)
+        for (int i = 1; i < 3; i++)
         {
             if (XXX[0] == XXX[i])
                 xcheck = i;
@@ -79,6 +163,7 @@ public class Solution
         else
             Console.WriteLine(YYY[ycheck]);
     }
+
     public void P1085()
     {
         String arg = Console.ReadLine();
@@ -98,8 +183,8 @@ public class Solution
             Console.WriteLine(y);
         else
             Console.WriteLine(x);
-
     }
+
     public void P9020()
     {
         int[] primecheck = new int[10001];
@@ -108,26 +193,23 @@ public class Solution
         primecheck[2] = 0;
         for (int i = 2; i <= 10000; i++)
         {
-
             if (primecheck[i] == 0)
             {
-
                 for (int j = i; j <= 10000;)
                 {
                     j += i;
                     if (j < 10001)
                         primecheck[j] = 1;
-
                 }
             }
         }
 
         int T = Convert.ToInt32(Console.ReadLine());
-        for(int i = 0; i<T; i++)
+        for (int i = 0; i < T; i++)
         {
             int n = Convert.ToInt32(Console.ReadLine());
-            int bah=2;
-            for(int j = 2; j<=n/2; j++)
+            int bah = 2;
+            for (int j = 2; j <= n / 2; j++)
             {
                 if (primecheck[j] == 0 && primecheck[n - j] == 0)
                 {
@@ -136,9 +218,8 @@ public class Solution
             }
             Console.WriteLine(bah + " " + (n - bah));
         }
-        
-        
     }
+
     public void P4948()
     {
         int[] primecheck = new int[300001];
@@ -147,16 +228,13 @@ public class Solution
         primecheck[2] = 0;
         for (int i = 2; i <= 300000; i++)
         {
-
             if (primecheck[i] == 0)
             {
-
                 for (int j = i; j <= 300000;)
                 {
                     j += i;
                     if (j < 300001)
                         primecheck[j] = 1;
-
                 }
             }
         }
@@ -165,18 +243,18 @@ public class Solution
         {
             n = Convert.ToInt32(Console.ReadLine());
             int count = 0;
-            for(int i = n+1; i<=2*n; i++)
+            for (int i = n + 1; i <= 2 * n; i++)
             {
-                if (primecheck[i] == 0) { 
-                    
+                if (primecheck[i] == 0)
+                {
                     count++;
                 }
             }
-            if(count != 0)
+            if (count != 0)
                 Console.WriteLine(count);
         } while (n > 0);
-        
     }
+
     public void P1929()
     {
         int[] primecheck = new int[1000001];
@@ -188,11 +266,9 @@ public class Solution
         int M = Convert.ToInt32(MN[0]);
         int N = Convert.ToInt32(MN[1]);
         var result = new StringBuilder();
-        
-        
+
         for (int i = 2; i <= N; i++)
         {
-
             if (primecheck[i] == 0)
             {
                 if (i >= M)
@@ -204,18 +280,13 @@ public class Solution
                     j += i;
                     if (j < 1000001)
                         primecheck[j] = 1;
-
                 }
             }
         }
 
-       
-
-
         Console.WriteLine(result);
-
-
     }
+
     public void P2581()
     {
         int[] primecheck = new int[10001];
@@ -228,27 +299,25 @@ public class Solution
         int min = -1;
         List<int> n = new List<int> { };
 
-        for (int i = 2; i <=N; i++)
+        for (int i = 2; i <= N; i++)
         {
-
             if (primecheck[i] == 0)
             {
-
                 for (int j = i; j <= N;)
                 {
                     j += i;
                     if (j < 10001)
                         primecheck[j] = 1;
-
                 }
             }
         }
 
-        for(int i = M; i<=N  ; i++)
+        for (int i = M; i <= N; i++)
         {
-            if(primecheck[i]== 0)
+            if (primecheck[i] == 0)
             {
-                if (sum == -1) { 
+                if (sum == -1)
+                {
                     min = i;
                     sum = i;
                 }
@@ -256,72 +325,60 @@ public class Solution
                 {
                     sum += i;
                 }
-                
             }
         }
 
-
-
         Console.WriteLine(sum);
-        if(sum != -1)
+        if (sum != -1)
         {
             Console.WriteLine(min);
         }
-        
     }
+
     public void P1978()
     {
         int[] primecheck = new int[1000];
         primecheck[1] = 1;
         primecheck[2] = 0;
-        List<int> n = new List<int> {};
+        List<int> n = new List<int> { };
 
- 
         int count = 0;
         int t = Convert.ToInt32(Console.ReadLine());
         String args = Console.ReadLine();
         String[] arg = args.Split(" ");
 
-        for(int i = 0; i <arg.Length; i++)
+        for (int i = 0; i < arg.Length; i++)
         {
             n.Add(Convert.ToInt32(arg[i]));
         }
         n.Sort();
-        
-        for (int i = 2; i<= n[n.Count-1]; i++)
+
+        for (int i = 2; i <= n[n.Count - 1]; i++)
         {
-
-            if(primecheck[i] == 0)
+            if (primecheck[i] == 0)
             {
-
-                for (int j = i; j <= n[n.Count - 1]; )
+                for (int j = i; j <= n[n.Count - 1];)
                 {
                     j += i;
-                    if( j< 1000)
-                    primecheck[j] = 1;
-
+                    if (j < 1000)
+                        primecheck[j] = 1;
                 }
             }
-          
         }
-        for(int i = 0; i<t; i++)
+        for (int i = 0; i < t; i++)
         {
             if (primecheck[n[i]] == 0)
                 count++;
-               
         }
 
-
         Console.WriteLine(count);
-        
-
     }
+
     public void P1011()
     {
-
         int T = Convert.ToInt32(Console.ReadLine());
-        
-        for(int j = 0 ; j<T; j++)
+
+        for (int j = 0; j < T; j++)
         {
             String arg = Console.ReadLine();
             String[] XY = arg.Split(" ");
@@ -332,7 +389,7 @@ public class Solution
             int move = 2;
             int i = 2;
 
-            while (i < Y-X)
+            while (i < Y - X)
             {
                 if (mod == 0)
                 {
@@ -348,26 +405,24 @@ public class Solution
                     move++;
                 }
             }
-            if (Y-X == 1)
+            if (Y - X == 1)
                 move = 1;
 
             Console.WriteLine(move);
         }
-        
-   
-
     }
-    public void P2775() 
+
+    public void P2775()
     {
         // 버전차이로 컴파일 에러 , 메서드 안에 메서드 있어서 오류
 
-        int number(int k , int n)
+        int number(int k, int n)
         {
             if (k == 0)
             {
                 return n;
             }
-            else if(n == 1)
+            else if (n == 1)
             {
                 return 1;
             }
@@ -375,11 +430,10 @@ public class Solution
             {
                 return number(k - 1, n) + number(k, n - 1);
             }
-            
         }
 
         int T = Convert.ToInt32(Console.ReadLine());
-        for(int i = 0; i<T; i++)
+        for (int i = 0; i < T; i++)
         {
             int k = Convert.ToInt32(Console.ReadLine());
             int n = Convert.ToInt32(Console.ReadLine());
@@ -387,6 +441,7 @@ public class Solution
             Console.WriteLine(result);
         }
     }
+
     public void P10250()
     {
         int n = Convert.ToInt32(Console.ReadLine());
@@ -395,9 +450,9 @@ public class Solution
         {
             String arg = Console.ReadLine();
             String result = "";
-            
+
             String[] HWN = arg.Split(" ");
-          
+
             int Ho = (Convert.ToInt32(HWN[2]) - 1) / Convert.ToInt32(HWN[0]);
             int Floor = Convert.ToInt32(HWN[2]) - Convert.ToInt32(HWN[0]) * Ho;
 
@@ -408,9 +463,9 @@ public class Solution
             result += Convert.ToString(Ho + 1);
 
             Console.WriteLine(result);
-
         }
     }
+
     public void P2869()
     {
         String arg = Console.ReadLine();
@@ -427,8 +482,8 @@ public class Solution
             day = day + V / (A - B) + 1;
             Console.WriteLine(day);
         }
-
     }
+
     public void P1193()
     {
         int n = Convert.ToInt32(Console.ReadLine());
@@ -444,13 +499,12 @@ public class Solution
             Console.WriteLine(n + "/" + (i - n + 1));
         else
             Console.WriteLine((i - n + 1) + "/" + n);
-
     }
+
     public void P2292()
     {
         int N = Convert.ToInt32(Console.ReadLine()) - 1;
         int range = 1;
-
 
         while (N > 0)
         {
@@ -458,9 +512,9 @@ public class Solution
             range++;
         }
 
-
         Console.WriteLine(range);
     }
+
     public void P1712()
     {
         String[] ABC = new String[3];
@@ -477,8 +531,8 @@ public class Solution
 
         count = A / BC + 1;
         Console.WriteLine(count);
-
     }
+
     public void P1316()
     {
         int n = Convert.ToInt32(Console.ReadLine());
@@ -492,8 +546,6 @@ public class Solution
             String arg = Console.ReadLine();
             for (j = 0; j < arg.Length; j++)
             {
-
-
                 if (target.Equals(' '))
                 {
                     target = arg[j];
@@ -509,20 +561,17 @@ public class Solution
                     }
                     else
                     {
-
                         target = arg[j];
                     }
                 }
-
-
             }
-
 
             if (check == true)
                 count++;
         }
         Console.WriteLine(count);
     }
+
     public void P2941()
     {
         String arg = Console.ReadLine();
@@ -547,8 +596,8 @@ public class Solution
         count += arg.Length;
 
         Console.WriteLine(count - Acount);
-
     }
+
     public void P5622()
     {
         String arg = Console.ReadLine();
@@ -568,6 +617,7 @@ public class Solution
         }
         Console.WriteLine(sum);
     }
+
     public void P2908()
     {
         String asb = Console.ReadLine();
@@ -600,12 +650,10 @@ public class Solution
 
         if (a > b)
             Console.WriteLine(a);
-
         else
             Console.WriteLine(b);
-
-
     }
+
     public void P1152()
     {
         int countnull = 0;
@@ -619,6 +667,7 @@ public class Solution
 
         Console.WriteLine(splitargs.Length - countnull);
     }
+
     public void P1157()
     {
         int[] site = new int[26] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -654,15 +703,14 @@ public class Solution
             {
                 check = 1;
             }
-
         }
 
         if (check == 1)
             Console.WriteLine("?");
         else
             Console.WriteLine(Convert.ToChar(c));
-
     }
+
     public void P2675()
     {
         int T = Convert.ToInt32(Console.ReadLine());
@@ -683,6 +731,7 @@ public class Solution
             Console.WriteLine();
         }
     }
+
     public void P10809()
     {
         int[] site = new int[26] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -706,6 +755,7 @@ public class Solution
         }
         Console.WriteLine(site[site.Length - 1]);
     }
+
     public void P4673()
     {
         int[] notSelf = new int[10001];
@@ -722,7 +772,6 @@ public class Solution
                 notSelf[nextN] = 1;
                 Selcheck(nextN);
             }
-
         }
         int split(int n)
         {
@@ -737,7 +786,6 @@ public class Solution
             nextN = nextN + n;
 
             return nextN;
-
         }
 
         for (int i = 1; i < 10001; i++)
@@ -745,12 +793,12 @@ public class Solution
             Selcheck(i);
         }
     }
+
     public void P1065()
     {
-
         static Boolean hansu(int a)
         {
-            int n = a; // 남은 수  
+            int n = a; // 남은 수
             int x;  // 이전 수
             int dif = 10; //등차  10이 나올수 없음
 
@@ -758,7 +806,6 @@ public class Solution
             {
                 return true;
             }
-
 
             x = n % 10; // 1의자리수 ;
 
@@ -777,7 +824,6 @@ public class Solution
                     else
                     {
                         x = n % 10;
-
                     }
                 }
             }
@@ -795,9 +841,8 @@ public class Solution
         }
 
         Console.WriteLine(count);
-
-
     }
+
     public void P11654()
     {
         int a;
@@ -805,6 +850,7 @@ public class Solution
 
         Console.WriteLine(a);
     }
+
     public void P8958()
     {
         int Score;
@@ -830,11 +876,10 @@ public class Solution
             }
             Console.WriteLine(Score);
         }
-
     }
+
     public void P3052()
     {
-
         int i;
         int n = 0; ;
         int[] arry = new int[42];
@@ -851,9 +896,9 @@ public class Solution
 
         Console.WriteLine(n);
     }
+
     public void P2577()
     {
-
         int i; int N = 1;
         int[] arry = new int[10];
         String list;
@@ -876,9 +921,9 @@ public class Solution
             Console.WriteLine(arry[i]);
         }
     }
+
     public void P2562()
     {
-
         int rank = 0;
         int i;
         int[] score = new int[9];
@@ -897,9 +942,9 @@ public class Solution
         Console.WriteLine(score[rank]);
         Console.WriteLine(rank + 1);
     }
+
     public void P10818()
     {
-
         int max = -1000000;
         int min = 1000000;
         int i;
@@ -917,11 +962,10 @@ public class Solution
         }
 
         Console.WriteLine(min + " " + max);
-
     }
+
     public void P10996()
     {
-
         int n;
         int i, j;
 
@@ -945,11 +989,10 @@ public class Solution
 
             Console.WriteLine();
         }
-
     }
+
     public void P2446()
     {
-
         int n;
         int i, j;
         int count = 0;
@@ -967,16 +1010,14 @@ public class Solution
 
                 if (j == 2 * n - 1 - (n - Math.Abs(i - n)) + 1)
                     break;
-
             }
 
             Console.WriteLine();
         }
-
     }
+
     public void P2523()
     {
-
         int n;
         int i, j;
 
@@ -991,11 +1032,10 @@ public class Solution
 
             Console.WriteLine();
         }
-
     }
+
     public void P5543()
     {
-
         int[] buger = new int[3];
         int[] drink = new int[2];
         string sarg;
@@ -1008,7 +1048,6 @@ public class Solution
                 buger[i] = Convert.ToInt32(sarg);
             else
                 drink[i - 3] = Convert.ToInt32(sarg);
-
 
             i++;
 
@@ -1028,23 +1067,17 @@ public class Solution
             set += drink[0];
 
         Console.WriteLine(set - 50);
-
-
-
-
     }
+
     public void P10039()
     {
-
         string sarg;
         int avg = 0;
         int count = 0;
         while ((sarg = Console.ReadLine()) != null)
         {
-
             if (Convert.ToInt32(sarg) >= 40)
                 avg = avg + Convert.ToInt32(sarg);
-
             else
                 avg = avg + 40;
             count++;
@@ -1052,39 +1085,29 @@ public class Solution
                 break;
         }
 
-
         Console.WriteLine(avg / 5);
     }
+
     public void P10951()
     {
-
         string sarg;
-
 
         while ((sarg = Console.ReadLine()) != null)
         {
-
-
             string[] sparg = sarg.Split(" ");
-
 
             if (int.Parse(sparg[0]) >= 10 || int.Parse(sparg[0]) <= 0)
                 break;
             if (int.Parse(sparg[1]) >= 10 || int.Parse(sparg[1]) <= 0)
                 break;
 
-
             Console.WriteLine("{0}", (int.Parse(sparg[0]) + int.Parse(sparg[1])));
-
-
         }
-
     }
+
     public void P10952()
     {
-
         string sarg;
-
 
         while (true)
         {
@@ -1094,66 +1117,53 @@ public class Solution
                 break;
 
             Console.WriteLine("{0}", (int.Parse(sparg[0]) + int.Parse(sparg[1])));
-
-
         }
-
     }
+
     public void P11022()
     {
-
         string sarg;
         int e;
         e = Convert.ToInt32(Console.ReadLine());
-
 
         for (int i = 0; i < e; i++)
         {
             sarg = Console.ReadLine();
             string[] sparg = sarg.Split(" ");
             Console.WriteLine("Case #{0}: {1} + {2} = {3}", i + 1, sparg[0], sparg[1], (int.Parse(sparg[0]) + int.Parse(sparg[1])));
-
         }
-
     }
+
     public void P11021()
     {
-
         string sarg;
         int e;
         e = Convert.ToInt32(Console.ReadLine());
-
 
         for (int i = 0; i < e; i++)
         {
             sarg = Console.ReadLine();
             string[] sparg = sarg.Split(" ");
             Console.WriteLine("Case #{0}: {1}", i + 1, (int.Parse(sparg[0]) + int.Parse(sparg[1])));
-
         }
-
     }
+
     public void P10950()
     {
-
         string sarg;
         int e;
         e = Convert.ToInt32(Console.ReadLine());
-
 
         for (int i = 0; i < e; i++)
         {
             sarg = Console.ReadLine();
             string[] sparg = sarg.Split(" ");
             Console.WriteLine((int.Parse(sparg[0]) + int.Parse(sparg[1])));
-
         }
-
     }
+
     public void P2884()
     {
-
-
         int a, b;
         string sarg;
 
@@ -1175,11 +1185,10 @@ public class Solution
             a = 23;
 
         Console.WriteLine(a + " " + b);
-
     }
+
     public void P14681()
     {
-
         int a, b;
         a = Convert.ToInt32(Console.ReadLine());
         b = Convert.ToInt32(Console.ReadLine());
@@ -1195,16 +1204,13 @@ public class Solution
         {
             if (a > 0)
                 Console.WriteLine(4);
-
             else
                 Console.WriteLine(2);
-
         }
-
     }
+
     public void P2753()
     {
-
         int a;
         a = Convert.ToInt32(Console.ReadLine());
 
@@ -1218,9 +1224,9 @@ public class Solution
         else
             Console.WriteLine(0);
     }
+
     public void P1330()
     {
-
         int a, b;
         string arg;
         arg = Console.ReadLine();
@@ -1237,31 +1243,24 @@ public class Solution
         if (a == b)
             Console.WriteLine("==");
     }
+
     public void P2588()
     {
-
         int a, b;
         a = Convert.ToInt32(Console.ReadLine());
         b = Convert.ToInt32(Console.ReadLine());
-
 
         Console.WriteLine("{0}", a * (b % 10));
         Console.WriteLine("{0}", a * ((b % 100) - (b % 10)) / 10);
         Console.WriteLine("{0}", a * (b - (b % 100)) / 100);
         Console.WriteLine("{0}", a * b);
-
     }
+
     public void P10171()
     {
-
         Console.WriteLine("\\    /\\");
         Console.WriteLine(" )  ( ')");
         Console.WriteLine("(  /  )");
         Console.WriteLine(" \\(__)|");
-
     }
-
-
-
-
 }

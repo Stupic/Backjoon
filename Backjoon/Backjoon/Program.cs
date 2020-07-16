@@ -7,7 +7,8 @@ namespace Backjoon
         static void Main(string[] args)
         {
             Solution s = new Solution();
-            s.P3053();
+            s.P2447();
+           
         }
     }
 }
