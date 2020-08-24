@@ -1,10 +1,360 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Linq;
 using System.Text;
+using System.Threading;
 
 public class Solution
 {
+    public void P2751()
+    {
+        int size = Convert.ToInt32(Console.ReadLine());
+        int temp;
+        int[] list = new int[size];
+        for (int i = 0; i < size; i++)
+        {
+            list[i] = Convert.ToInt32(Console.ReadLine());
+        }
 
+        
+        for (int i = 1; i < size; i++)
+        {
+            int child = i;   //자식
+
+            do
+            {
+                int root = (child - 1) / 2;
+                if (list[child] > list[root])
+                {
+                    temp = list[child];
+                    list[child] = list[root];
+                    list[root] = temp;
+                }
+                child = root;
+            }
+            while (child > 0);
+
+        }
+
+        for (int i = size - 1; i > 0; i--)
+        {
+            int root = 0;
+            temp = list[i];
+            list[i] = list[root];
+            list[root] = temp;
+
+            int child;
+
+            do
+            {
+                child = root * 2 + 1;
+
+                if (child < i - 1 && list[child] < list[child + 1])  // 자식 왼쪽, 오른쪽
+                    child++;
+
+                if (child < i && list[root] < list[child])  // 부모  자식,작은 자식 교환
+                {
+                    temp = list[child];
+                    list[child] = list[root];
+                    list[root] = temp;
+                }
+                root = child;
+            }
+            while (child < i);
+
+        }
+
+
+        /*for(int i = 0; i<N; i++)
+        {
+            int son = i;
+
+            while (son >=1)
+            {
+                int root = (son - 1) / 2;
+
+                if(ary[root] < ary[son])
+                {
+                    temp = ary[root];
+                    ary[root] = ary[son];
+                    ary[son] = temp;
+                }
+                son = root;
+            }
+        }
+
+        for(int i = N-1; i>0; i--)
+        {
+            int root = 0;
+            temp = ary[root];
+            ary[root] = ary[i];
+            ary[i] = temp;
+            
+            while(root<i)
+            {
+                int son = root * 2 + 1;
+
+                if (son < i - 1 && ary[son] < ary[son + 1])
+                    son++;
+                if (son < i &&ary[son] > ary[root]  )
+                {
+                    temp = ary[root];
+                    ary[root] = ary[son];
+                    ary[son] = temp;
+                }
+                root = son;
+            }
+        }*/
+
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write(list[i] + "  ");
+        }
+
+
+    }
+    public void P2750()
+    {
+        int temp;
+        int N = Convert.ToInt32(Console.ReadLine());
+        int[] ary = new int[N];
+        for(int i = 0; i<N; i++)
+        {
+            ary[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        for(int i = 0; i<N; i++)
+        {
+            for(int j = i; j<N; j++)
+            {
+                if (ary[i] > ary[j])
+                {
+                    temp = ary[i];
+                    ary[i] = ary[j];
+                    ary[j] = temp;
+                }
+            }
+        }
+
+
+        for(int i = 0; i<N; i++)
+        {
+            Console.WriteLine(ary[i]);
+        }
+    }
+    public void P1436()
+    {
+        int i = 665;
+        int N = Convert.ToInt32(Console.ReadLine());
+        int Count = 0;
+        String Dend = "666";
+
+        while (N != Count)
+        {
+            i++;
+            String temp = i.ToString();
+
+            if (temp.Contains(Dend)) { 
+                Count++;
+                Console.WriteLine(i);
+            }
+
+
+
+        }
+
+        Console.WriteLine(i);
+        
+    }
+    public void P1018()
+    {
+        String arg = Console.ReadLine();
+        String[] xy = arg.Split(" ");
+        int col = Convert.ToInt32(xy[0]);
+        int row = Convert.ToInt32(xy[1]);
+        String[] Board = new string[col];
+        
+        String[] WB = new string[] { "W", "B" };
+        int first = 0;
+        int second = 1;
+
+        for(int i = 0; i<col; i++)
+        {
+            Board[i] = Console.ReadLine();
+        }
+        int Count1 = 0;
+        int Count2 = 0;
+        int Min = 32 ;
+        
+
+        for (int x = 0 ; x <=col-8; x++)
+        {
+            for(int y = 0; y<= row- 8; y++)
+            {
+                for (int i = x; i < x + 8; i++)
+                {
+                   
+                    for(int j = y; j < y+8; j++)
+                    {
+                        if (WB[(first + i + j) % 2].Contains(Board[i][j]))
+                            Count1++;
+                        if (WB[(second + i + j) % 2].Contains(Board[i][j]))
+                            Count2++;
+                    }
+                    
+
+                }
+
+
+                if (Min > Count1)
+                    Min = Count1;
+
+                if (Min > Count2)
+                    Min = Count2;
+
+                Count1 = 0;
+                Count2 = 0;
+            }
+          
+        }
+        Console.WriteLine(Min);
+
+    }
+    public void P7568()
+    {
+        int N = Convert.ToInt32(Console.ReadLine());
+        List<int[]> humen = new List<int[]> { }; 
+        for(int i = 0; i<N; i ++)
+        {
+            String n = Console.ReadLine();
+            String[] wh = n.Split(' ');
+            int[] temp = new int[2]  ;
+            temp[0] = Convert.ToInt32(wh[0]);
+            temp[1] = Convert.ToInt32(wh[1]);
+            humen.Add(temp);
+        }
+
+        for(int i = 0; i< N; i++)
+        {
+            int site = 1;
+            for(int j = 0; j< N; j++)
+            {
+                 if(humen[i][0] < humen[j][0])
+                 {
+                    if (humen[i][1] < humen[j][1])
+                        site++;
+                 }
+            }
+            Console.Write(site);
+            if (i != N - 1)
+                Console.Write(" ");
+        }
+      
+    }
+    public void P2231()
+    {
+        int N = Convert.ToInt32(Console.ReadLine());
+        
+        for( int  i = 1; i<=N; i++)
+        {
+            int Sum = i;
+            int j = i;
+            while (j != 0)
+            {
+                Sum += j % 10;
+                j /= 10;
+            }
+            if (Sum == N)
+            {
+                Console.WriteLine(i);
+                break;
+            }
+            if(i == N)
+            {
+                Console.WriteLine("0");
+            }
+              
+        }
+       
+    }
+    public void P2798()
+    {
+        int N, M;
+        String arg = Console.ReadLine();
+        String[] NM = arg.Split(" ");
+        N = Convert.ToInt32(NM[0]);
+        M = Convert.ToInt32(NM[1]);
+
+        arg = Console.ReadLine();
+        String[] Card = arg.Split(" ");
+        
+        int Approx= 0;
+        for (int k = 0; k < N - 2; k++)
+        {
+            for (int i = k+1; i < N - 1; i++)
+            {
+                for (int j = i + 1; j < N; j++)
+                {
+                    int temp = Convert.ToInt32(Card[k]) + Convert.ToInt32(Card[i]) + Convert.ToInt32(Card[j]);
+                    
+                    Console.WriteLine(k+" "+i+" "+j+" "+temp);
+
+                    if (temp <= M && temp > Approx)
+                        Approx = temp;
+                }
+            }
+        }
+       
+        Console.WriteLine(Approx);
+    }
+    public void P11729()
+    {
+
+        int N = Convert.ToInt32(Console.ReadLine());
+  
+        List<int[]> history = new List<int[]> { };
+        var arg = new StringBuilder();
+
+        void hanoi(int n, int start, int end, int middle, List<int[]> history)
+        {
+            if (n == 1)
+            {
+                int[] temp= new int[2] ;
+                temp[0] = start;
+                temp[1] = end;
+                history.Add(temp);
+                
+            }
+            else
+            {
+                
+                hanoi(n - 1, start, middle, end, history);
+                int[] temp = new int[2];
+                temp[0] = start;
+                temp[1] = end;
+                history.Add(temp);
+                hanoi(n - 1, middle, end, start, history);
+            }
+        }
+
+        hanoi(N, 1, 3, 2, history);
+
+
+        Console.WriteLine(history.Count);
+        foreach(int[] item in history)
+        {
+            arg.Append(item[0] + " " + item[1] + "\n");
+            Console.WriteLine(item[0] + " " + item[1]);
+        }
+
+
+        Console.WriteLine(arg);
+
+    }
+    
     public void P2447()
     {
         
@@ -132,7 +482,7 @@ public class Solution
     {
         int[] XXX = new int[3];
         int[] YYY = new int[3];
-        int x, y;
+        
         int xcheck = 0;
         int ycheck = 0;
         for (int i = 0; i < 3; i++)
@@ -995,7 +1345,7 @@ public class Solution
     {
         int n;
         int i, j;
-        int count = 0;
+    
 
         n = Convert.ToInt32(Console.ReadLine());
 
