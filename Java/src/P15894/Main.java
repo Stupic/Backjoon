@@ -1,8 +1,9 @@
-package P15964;
+package P15894;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 
 public class Main {
 
@@ -10,11 +11,9 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String[] input = br.readLine().split(" ");
+        BigInteger n = new BigInteger(br.readLine());
 
-        long a = Long.parseLong(input[0]);
-        long b = Long.parseLong(input[1]);
-        System.out.println((a+b)*(a-b));
+        System.out.println(n.multiply(BigInteger.valueOf(4)));
         br.close();
     }
 }
