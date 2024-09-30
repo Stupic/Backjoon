@@ -1,8 +1,9 @@
-package P15964;
+package P28702;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -10,11 +11,32 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String[] input = br.readLine().split(" ");
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(br.readLine());
+        list.add(br.readLine());
+        list.add(br.readLine());
 
-        long a = Long.parseLong(input[0]);
-        long b = Long.parseLong(input[1]);
-        System.out.println((a+b)*(a-b));
+        int i ;
+        long number = 0 ;
+        for ( i = 0; i < list.size(); i++) {
+            String s = list.get(i);
+            if (s.matches("\\d+")) {
+                number = Long.parseLong(s) + 3 - i;
+                break;
+            }
+        }
+        String result;
+        if (number % 15 == 0){
+            result = "FizzBuzz";
+        }else if (number % 5 == 0){
+            result = "Buzz";
+        }else if (number % 3 == 0){
+            result = "Fizz";
+        }else{
+            result = String.valueOf(number);
+        }
+        System.out.println(result);
+
         br.close();
     }
 }
