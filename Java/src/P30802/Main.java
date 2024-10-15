@@ -1,9 +1,8 @@
-package P28702;
+package P30802;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -11,32 +10,19 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        ArrayList<String> list = new ArrayList<String>();
-        list.add(br.readLine());
-        list.add(br.readLine());
-        list.add(br.readLine());
+        int N = Integer.parseInt(br.readLine());
+        String[] peopleBySize = br.readLine().split(" ");
+        String[] TP = br.readLine().split(" ");
+        int T = Integer.parseInt(TP[0]);
+        int P = Integer.parseInt(TP[1]);
 
-        int i ;
-        long number = 0 ;
-        for ( i = 0; i < list.size(); i++) {
-            String s = list.get(i);
-            if (s.matches("\\d+")) {
-                number = Long.parseLong(s) + 3 - i;
-                break;
-            }
+        int packageCnt = 0;
+        for (int i = 0; i < peopleBySize.length; i++) {
+            int people = Integer.parseInt(peopleBySize[i]);
+            packageCnt += (int)Math.ceil((double) people/T);
         }
-        String result;
-        if (number % 15 == 0){
-            result = "FizzBuzz";
-        }else if (number % 5 == 0){
-            result = "Buzz";
-        }else if (number % 3 == 0){
-            result = "Fizz";
-        }else{
-            result = String.valueOf(number);
-        }
-        System.out.println(result);
-
+        System.out.println(packageCnt);
+        System.out.println(N/P + " " + N%P);
         br.close();
     }
 }
