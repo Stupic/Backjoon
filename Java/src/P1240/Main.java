@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-     static ArrayList<Node> nodes;
-     static boolean[] visited;
+    static ArrayList<Node> nodes;
+    static boolean[] visited;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -36,30 +36,27 @@ public class Main {
             visited = new boolean[n];
             System.out.println( bfs(nodeA, nodeB, 0));
         }
+
         br.close();
     }
 
     private static int bfs(int start, int end, int curDistance) {
-        if (start == end) {
-            return curDistance;
-        }
+        if (start == end) return curDistance;
+
+        int nextDistance = -1;
         visited[start] = true;
-        int nextDistance = Integer.MAX_VALUE;
         Node cur = nodes.get(start);
         Set<Integer> links = cur.links.keySet();
         for (Integer next : links) {
             if (!visited[next]) {
                 int distance = bfs(next, end, cur.links.get(next));
                 if (distance == -1 ) continue;
-                if (nextDistance - distance > curDistance) {
-                    nextDistance = curDistance + distance;
-                }
+                nextDistance = curDistance + distance;
             }
         }
 
         return nextDistance;
     }
-
 }
 
 class Node {
