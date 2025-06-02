@@ -13,8 +13,6 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
         switch (n) {
             case 0:
-                System.out.println(1);
-                break;
             case 1:
                 System.out.println(1);
                 break;
